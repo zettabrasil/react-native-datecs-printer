@@ -5,22 +5,8 @@ Impressão com Datecs DPP-250 plataforma Android
 ## Installation
 
 ```sh
-npm install react-native-datecs-printer
+npm install --save @zettabrasil/react-native-datecs-printer
 ```
-
-## Usage
-
-```js
-import { multiply } from 'react-native-datecs-printer';
-
-// ...
-
-const result = await multiply(3, 7);
-```
-
-## Contributing
-
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 
 ## License
 

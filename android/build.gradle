@@ -45,7 +45,7 @@ def supportsNamespace() {
 
 android {
   if (supportsNamespace()) {
-    namespace "com.datecsprinter"
+    namespace "br.com.zettabrasil.datecsprinter"
 
     sourceSets {
       main {
@@ -87,6 +87,9 @@ repositories {
 dependencies {
   // For < 0.71, this will be from the local maven repo
   // For > 0.71, this will be replaced by `com.facebook.react:react-android:$version` by react gradle plugin
+  implementation fileTree(dir: "libs", include: ["*.jar"])
+  implementation files('libs/com.datecs.api.jar');
+
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
 }
@@ -95,6 +98,6 @@ if (isNewArchitectureEnabled()) {
   react {
     jsRootDir = file("../src/")
     libraryName = "DatecsPrinter"
-    codegenJavaPackageName = "com.datecsprinter"
+    codegenJavaPackageName = "br.com.zettabrasil.datecsprinter"
   }
 }

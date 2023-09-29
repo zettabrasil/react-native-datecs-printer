@@ -1,5 +1,5 @@
 {
-  "name": "react-native-datecs-printer",
+  "name": "@zettabrasil/react-native-datecs-printer",
   "version": "0.1.0",
   "description": "Impressão com Datecs DPP-250 plataforma Android",
   "main": "lib/commonjs/index",
@@ -11,11 +11,8 @@
     "src",
     "lib",
     "android",
-    "ios",
     "cpp",
-    "*.podspec",
     "!lib/typescript/example",
-    "!ios/build",
     "!android/build",
     "!android/gradle",
     "!android/gradlew",
@@ -32,12 +29,17 @@
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
     "prepack": "bob build",
-    "release": "release-it",
-    "example": "yarn workspace react-native-datecs-printer-example"
+    "release": "release-it --only-version",
+    "release:patch": "release-it patch --ci",
+    "release:minor": "release-it minor --ci",
+    "release:major": "release-it major --ci",
+    "release:rc:patch": "release-it prepatch --preRelease=rc --ci",
+    "release:rc:minor": "release-it preminor --preRelease=rc --ci",
+    "release:rc:major": "release-it premajor --preRelease=rc --ci",
+    "release:rc": "release-it --preRelease=rc --ci"
   },
   "keywords": [
     "react-native",
-    "ios",
     "android"
   ],
   "repository": "https://github.com/zettabrasil/react-native-datecs-printer",
@@ -102,13 +104,19 @@
   "release-it": {
     "git": {
       "commitMessage": "chore: release ${version}",
+      "changelog": "npx auto-changelog --stdout --commit-limit false -u --template https://raw.githubusercontent.com/release-it/release-it/main/templates/changelog-compact.hbs",
       "tagName": "v${version}"
     },
     "npm": {
-      "publish": true
+      "publish": false
     },
     "github": {
-      "release": true
+      "release": false
+    },
+    "hooks": {
+      "after:bump": [
+        "npx auto-changelog -p"
+      ]
     },
     "plugins": {
       "@release-it/conventional-changelog": {
@@ -123,15 +131,31 @@
       "prettier"
     ],
     "rules": {
-      "prettier/prettier": [
-        "error",
+      "prettier/prettier": 0,
+      "indent": [
+        2,
+        2,
         {
-          "quoteProps": "consistent",
-          "singleQuote": true,
-          "tabWidth": 2,
-          "trailingComma": "es5",
-          "useTabs": false
+          "SwitchCase": 1
         }
+      ],
+      "semi": [
+        2,
+        "always"
+      ],
+      "quotes": [
+        2,
+        "double"
+      ],
+      "jsx-quotes": [
+        2,
+        "prefer-double"
+      ],
+      "react-hooks/exhaustive-deps": [
+        0
+      ],
+      "radix": [
+        0
       ]
     }
   },
